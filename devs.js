@@ -1,16 +1,5 @@
 //Translate border-left-width to borderLeftWidth
 
-//Write the function camelize(str) that changes dash-separated words like “my-short-string” into camel-cased “myShortString”.
-
-//That is: removes all dashes, each word after dash becomes uppercased.
-
-//Examples:
-
-
-
-//camelize("background-color") == 'backgroundColor';
-//camelize("list-style-image") == 'listStyleImage';
-//camelize("-webkit-transition") == 'WebkitTransition';
 
 
 function camelize(str) {
@@ -30,20 +19,6 @@ function camelize(str) {
 //Filter range
 
 
-//Write a function filterRange(arr, a, b) that gets an array arr, 
-//looks for elements with values higher or equal to a and lower or equal to b and return a result as an array.
-
-//The function should not modify the array. It should return the new array.
-
-//For instance:
-
-//let arr = [5, 3, 8, 1];
-
-//let filtered = filterRange(arr, 1, 4);
-
-//alert( filtered ); // 3,1 (matching values)
-
-//alert( arr ); // 5,3,8,1 (not modified)
 
 
 function filterRange(arr, a, b) {
@@ -65,18 +40,6 @@ alert( arr ); // 5,3,8,1 (not modified)
 //Filter range "in place"
 
 
-//Write a function filterRangeInPlace(arr, a, b) that gets an array arr and removes from it all values except those that are between a and b. 
-//The test is: a ≤ arr[i] ≤ b.
-
-//The function should only modify the array. It should not return anything.
-
-//For instance:
-
-//let arr = [5, 3, 8, 1];
-
-//filterRangeInPlace(arr, 1, 4); // removed the numbers except from 1 to 4
-
-//alert( arr ); // [3, 1]
 
 
 unction filterRangeInPlace(arr, a, b) {
@@ -118,18 +81,6 @@ alert( arr );
 //Copy and sort array
 
 
-//We have an array of strings arr. We’d like to have a sorted copy of it, but keep arr unmodified.
-
-//Create a function copySorted(arr) that returns such a copy.
-
-//let arr = ["HTML", "JavaScript", "CSS"];
-
-//let sorted = copySorted(arr);
-
-//alert( sorted ); // CSS, HTML, JavaScript
-//alert( arr ); // HTML, JavaScript, CSS (no changes)
-
-
 
 function copySorted(arr) {
   return arr.slice().sort();
@@ -148,4 +99,136 @@ alert( arr );
 
 //Create an extendable calculator
 
+
+function Calculator() {
+
+  this.methods = {
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b
+  };
+
+  this.calculate = function(str) {
+
+    let split = str.split(' '),
+      a = +split[0],
+      op = split[1],
+      b = +split[2];
+
+    if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+      return NaN;
+    }
+
+    return this.methods[op](a, b);
+  };
+
+  this.addMethod = function(name, func) {
+    this.methods[name] = func;
+  };
+}
+
+//*********************************************
+
+//Map to names
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 28 };
+
+let users = [ john, pete, mary ];
+
+let names = users.map(item => item.name);
+
+//*****************************************************
+
+//Map to objects
+
+
+
+
+
+let john = { name: "John", surname: "Smith", id: 1 };
+let pete = { name: "Pete", surname: "Hunt", id: 2 };
+let mary = { name: "Mary", surname: "Key", id: 3 };
+
+let users = [ john, pete, mary ];
+
+let usersMapped = users.map(user => ({
+  fullName: `${user.name} ${user.surname}`,
+  id: user.id
+}));
+
+
+
+
+
+//**********************************************************
+
+//Sort users by age
+
+
+
+function sortByAge(arr) {
+  arr.sort((a, b) => a.age - b.age);
+}
+
+
+//************************************************************
+
+
+//Shuffle an array
+
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+
+
+//***************************************************************
+
+
+//Get average age
+
+
+
+function getAverageAge(users) {
+  return users.reduce((prev, user) => prev + user.age, 0) / users.length;
+}
+
+
+//********************************************************************
+
+
+//Filter unique array members
+
+
+
+function unique(arr) {
+  let result = [];
+
+  for (let str of arr) {
+    if (!result.includes(str)) {
+      result.push(str);
+    }
+  }
+
+  return result;
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+
+
+
+//****************************************************************
+
+//Create keyed object from array
+
+function groupById(array) {
+  return array.reduce((obj, value) => {
+    obj[value.id] = value;
+    return obj;
+  }, {})
+}
 
